@@ -43,8 +43,9 @@ const SignInScreen = ({ navigation }) => {
 
   const handleSignIn = () => {
     if (validateForm()) {
-      Alert.alert('Success', 'Sign in successful!');
       // Here you would typically call your authentication API
+      // On success, navigate to the restaurant feed
+      navigation.navigate('RestaurantFeed');
     }
   };
 

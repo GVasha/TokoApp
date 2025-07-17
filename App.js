@@ -12,7 +12,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="RestaurantFeed"
+        initialRouteName="SignIn"
         screenOptions={{
           headerShown: false,
           gestureEnabled: true,

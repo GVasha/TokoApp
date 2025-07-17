@@ -7,7 +7,8 @@ import {
   SafeAreaView,
   RefreshControl,
   ActivityIndicator,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
@@ -52,7 +53,20 @@ const RestaurantFeedScreen = ({ navigation }) => {
   const handleTabPress = (tabId) => {
     setActiveTab(tabId);
     if (tabId === 'profile') {
-      navigation.navigate('SignIn');
+      Alert.alert(
+        'Sign Out',
+        'Are you sure you want to sign out?',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { 
+            text: 'Sign Out', 
+            onPress: () => navigation.reset({
+              index: 0,
+              routes: [{ name: 'SignIn' }],
+            })
+          }
+        ]
+      );
     }
   };
 
