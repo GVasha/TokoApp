@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import RestaurantFeedScreen from './screens/RestaurantFeedScreen';
 import RestaurantDetailScreen from './screens/RestaurantDetailScreen';
+import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import SignInScreen from './screens/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen';
 
@@ -45,6 +46,13 @@ export default function App() {
           component={RestaurantDetailScreen}
           options={{
             title: 'Restaurant Menu',
+          }}
+        />
+        <Stack.Screen 
+          name="OrderHistory" 
+          component={OrderHistoryScreen}
+          options={{
+            title: 'Order History',
           }}
         />
         <Stack.Screen 

@@ -14,11 +14,13 @@ import { Ionicons } from '@expo/vector-icons';
 import BalanceCard from '../components/BalanceCard';
 import FoodDishCard from '../components/FoodDishCard';
 import FloatingCart from '../components/FloatingCart';
+import LocationSelector from '../components/LocationSelector';
 import { foodCategories, restaurantInfo } from '../data/foodData';
 
 const RestaurantDetailScreen = ({ navigation, route }) => {
   const [balance, setBalance] = useState(45.80); // User's current balance
   const [cart, setCart] = useState({}); // { dishId: quantity }
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   // Calculate cart totals
   const cartItems = Object.entries(cart).filter(([_, quantity]) => quantity > 0);
@@ -71,6 +73,15 @@ const RestaurantDetailScreen = ({ navigation, route }) => {
         { text: 'Continue Shopping', style: 'cancel' },
         { text: 'Checkout', onPress: handleCheckout }
       ]
+    );
+  };
+
+  const handleLocationChange = (location) => {
+    setSelectedLocation(location);
+    Alert.alert(
+      'Restaurant Location Updated',
+      `Ordering from ${location.name}`,
+      [{ text: 'OK' }]
     );
   };
 
@@ -154,10 +165,17 @@ const RestaurantDetailScreen = ({ navigation, route }) => {
           contentContainerStyle={styles.listContent}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={() => (
-            <BalanceCard 
-              balance={balance}
-              onAddFunds={handleAddFunds}
-            />
+            <View>
+              <LocationSelector
+                selectedLocation={selectedLocation}
+                onLocationChange={handleLocationChange}
+                style={styles.locationSelector}
+              />
+              <BalanceCard 
+                balance={balance}
+                onAddFunds={handleAddFunds}
+              />
+            </View>
           )}
           stickySectionHeadersEnabled={false}
         />
@@ -245,6 +263,11 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingBottom: 120, // Space for floating cart
+  },
+  locationSelector: {
+    marginHorizontal: 16,
+    marginTop: 16,
+    marginBottom: 8,
   },
 });
 

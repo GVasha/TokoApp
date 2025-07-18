@@ -52,7 +52,9 @@ const RestaurantFeedScreen = ({ navigation }) => {
 
   const handleTabPress = (tabId) => {
     setActiveTab(tabId);
-    if (tabId === 'profile') {
+    if (tabId === 'orders') {
+      navigation.navigate('OrderHistory');
+    } else if (tabId === 'profile') {
       Alert.alert(
         'Sign Out',
         'Are you sure you want to sign out?',
@@ -67,6 +69,8 @@ const RestaurantFeedScreen = ({ navigation }) => {
           }
         ]
       );
+    } else if (tabId === 'search') {
+      Alert.alert('Search', 'Search functionality coming soon!');
     }
   };
 
@@ -92,7 +96,6 @@ const RestaurantFeedScreen = ({ navigation }) => {
       <View style={styles.headerLeft}>
         <TouchableOpacity style={styles.locationButton}>
           <Ionicons name="location-outline" size={20} color="#000000" />
-          <Text style={styles.locationText}>Deliver to</Text>
           <Text style={styles.addressText}>123 Main St</Text>
           <Ionicons name="chevron-down" size={16} color="#666666" />
         </TouchableOpacity>
@@ -170,12 +173,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  locationText: {
-    fontSize: 12,
-    color: '#666666',
-    marginLeft: 4,
-    fontWeight: '400',
-  },
+
   addressText: {
     fontSize: 14,
     color: '#000000',
